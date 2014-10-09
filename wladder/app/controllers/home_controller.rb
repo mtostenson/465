@@ -26,10 +26,15 @@ class HomeController < ApplicationController
 	   @guesses.each_with_index do |guess, i|
 	      $winner = legal @guesses
 	      if guess == @guesses.first
-	         $winner = edit_distance_of_one($random1, guess)
+	         if not edit_distance_of_one($random1, guess)
+	            $winner = false
+	         end
 	      elsif guess == @guesses.last
-	         $winner = edit_distance_of_one(guess, $random2)
-	      else $winner = edit_distance_of_one(guess, @guesses[i+1])
+	         if not edit_distance_of_one(guess, $random2)
+	            $winner = false
+	         end
+	      elsif edit_distance_of_one(guess, @guesses[i+1])
+	         $winner = false	      
 	      end
 	   end
 	   if not edit_distance_of_one($random1, params[:one])

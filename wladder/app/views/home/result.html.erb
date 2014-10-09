@@ -1,3 +1,4 @@
+<%= link_to "Play again", root_path %><br>
 <h1>Result</h1>
 <table border="1">
    <tr>   
@@ -16,9 +17,9 @@
       <td>End:</td>
       <td><%=$random2%></td>
    </tr>
-   <% if $winner == true %>
-      <tr>      
-         <td>YOU WIN</td>
-      </tr>   
-   <% end %>
 </table>
+ <% if $winner == true %>    
+      <h1>YOU WIN</h1>      
+   <% else %>
+      <h1>YOU LOSE</h1>   
+<% end %>

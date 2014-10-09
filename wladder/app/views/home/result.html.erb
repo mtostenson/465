@@ -1,2 +1,24 @@
-<%= @params[:one] %>
-<%= $random1 %>
+<h1>Result</h1>
+<table border="1">
+   <tr>   
+      <td>Start:</td>
+      <td><%=$random1%></td>
+   </tr>
+   <% @guesses.each_with_index do |word, i| %>   
+      <% if word != "" %>         
+         <tr>
+            <td>Step <%=i+1%>:</td>
+            <td><%=word%></td>
+         </tr>
+      <% end %>      
+   <% end %>   
+   <tr>
+      <td>End:</td>
+      <td><%=$random2%></td>
+   </tr>
+   <% if $winner == true %>
+      <tr>      
+         <td>YOU WIN</td>
+      </tr>   
+   <% end %>
+</table>

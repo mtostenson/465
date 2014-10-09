@@ -1,0 +1,19 @@
+<h1>Word Ladder</h1>
+<br>
+<%= form_tag(guess_path, method: "get") do %>
+   <%= label_tag(:guess, $random1) %>
+   <br>
+   <%= text_field_tag(:one) %>
+   <br>
+   <%= text_field_tag(:two) %>
+   <br>
+   <%= text_field_tag(:three) %>
+   <br>
+   <%= text_field_tag(:four) %>
+   <br>
+   <%= text_field_tag(:five) %>
+   <br>
+   <%= label_tag(:bottom, $random2) %>
+   <br>
+   <%= submit_tag("Guess") %>
+<% end %>

@@ -5,3 +5,28 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+professors = Professor.create(
+    [
+        {
+            first: 'Sally', last: 'Jones', university: 'Chico State'        
+        },
+        {
+            first: 'Fred', last: 'Smith', university: 'Chico State'
+        }
+    ]
+)
+
+ratings = Rating.create(
+    [
+        {
+            course: 'PHYS 204B', comment: 'Really difficult', rating: 4, professor_id: professors[0].id
+        },
+        {
+            course: 'PHYS 204B', comment: 'Really easy actually', rating: 78, professor_id: professors[0].id
+        },
+        {
+            course: 'MATH 217', comment: 'Impossible instructor', rating: 0, professor_id: professors[1].id
+        }
+    ]
+)

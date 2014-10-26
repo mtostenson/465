@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20141025230631) do
   end
 
   create_table "urls", force: true do |t|
-    t.string   "address"
+    t.string   "url"
     t.integer  "doi_id"
     t.datetime "created_at"
     t.datetime "updated_at"

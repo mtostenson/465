@@ -15,8 +15,8 @@ dois = Doi.create(
 
 urls = Url.create(
     [
-        { address: 'www.google.com', doi_id: dois[0].id },
-        { address: 'www.gooogle.com', doi_id: dois[0].id },
-        { address: 'www.robertsspaceindustries.com', doi_id: dois[1].id },
+        { url: 'www.google.com', doi_id: dois[0].id },
+        { url: 'www.gooogle.com', doi_id: dois[0].id },
+        { url: 'www.robertsspaceindustries.com', doi_id: dois[1].id },
     ]
 )

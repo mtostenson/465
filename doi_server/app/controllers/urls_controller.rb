@@ -73,5 +73,5 @@ class UrlsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def url_params
-      params.require(:url).permit(:course, :comment, :url)
+      params.require(:url).permit(:url)
 end

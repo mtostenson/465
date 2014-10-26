@@ -1,18 +1,9 @@
+# This controller does not have a show function
+# since urls are shown by doi, it does not make sense to
+# show a single url
 
 class UrlsController < ApplicationController
   before_action :set_url, only: [:edit, :update, :destroy]
-
-  # GET /dois/:doi_id/urls
-  def index
-    # index is now all the urls for a single doi (not all the urls)
-    # the URL will contain the id of the current doi (:doi_id)
-    # use the :doi_id parameter to find all the urls
-    @doi = Doi.find params[:doi_id]
-    # the has_many function called in app/models/doi.rb created the 
-    # function "urls" which will return an array of all the urls 
-    # with the doi foreign key matching @doi
-    @urls = @doi.urls
-  end
 
   # GET dois/:doi_id/urls/new
   # Create a new url in the context of a Doi object
@@ -42,7 +33,7 @@ class UrlsController < ApplicationController
     @url = @doi.urls.new(url_params)
 
     if @url.save
-      redirect_to doi_urls_url(@doi) , notice: 'Url was successfully created.'
+      redirect_to doi_url(@doi) , notice: 'Url was successfully created.'
     else
       render :new
     end
@@ -53,7 +44,7 @@ class UrlsController < ApplicationController
   # and cannot be changed by edit (note that doi_id is not permitted in url_params())
   def update
     if @url.update(url_params)
-      redirect_to doi_urls_url(@url.doi), notice: 'Url was successfully updated.'
+      redirect_to doi_url(@url.doi), notice: 'Url was successfully updated.'
     else
       render :edit
     end
@@ -62,7 +53,7 @@ class UrlsController < ApplicationController
   # DELETE /urls/1
   def destroy
     @url.destroy
-    redirect_to doi_urls_url(@url.doi) , notice: 'Url was successfully destroyed.'
+    redirect_to doi_url(@url.doi) , notice: 'Url was successfully destroyed.'
   end
 
   private

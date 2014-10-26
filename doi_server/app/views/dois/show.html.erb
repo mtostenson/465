@@ -1,15 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @doi.name%>
-</p>
+<h1><%= @doi.name%>'s Urls </h1>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @doi.desc %>
-</p>
+<!-- this table use to be in app/views/urls/index.html.erb -->
+<table>
+  <thead>
+      <tr>
+        <th>Url</th>
+        <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<%= link_to "Show Urls", doi_urls_path(@doi) %> |
-<%= link_to 'Edit', edit_doi_path(@doi) %> |
+  <tbody>
+    <% @doi.urls.each do |url| %>
+        <% if !url.new_record? %>    
+            <tr>
+                <td><%= url.url %></td>
+                <td><%= link_to 'Edit', edit_url_path(url) %></td>
+                <td><%= link_to 'Destroy', url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<h3>Create New URL</h3>
+<%= render 'urls/form' %>
+<br>
+<br>
+<%= link_to "Edit #{@doi.name}'s Profile", edit_doi_path(@doi) %> |
 <%= link_to 'Show all Dois', dois_path %>

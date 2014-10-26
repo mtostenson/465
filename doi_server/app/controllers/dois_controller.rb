@@ -3,7 +3,10 @@ class DoisController < ApplicationController
 
   # GET /dois
   def index
-    @dois = Doi.all
+    @search_query = params[:search_string]
+    if @search_query == 'test'
+        @dois = Doi.all
+    end
   end
 
   # GET /dois/1

@@ -4,7 +4,6 @@ class Doi < ActiveRecord::Base
     accepts_nested_attributes_for :urls
     
     validates :name, presence: true
-    validates :desc, presence: true
-    validates :university, presence: true
+    validates :desc, presence: true    
     
 end

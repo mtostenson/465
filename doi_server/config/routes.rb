@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     end
     
     root 'dois#index'
+    get 'search', to: 'dois#index'
             
 end

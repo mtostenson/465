@@ -4,30 +4,35 @@
 <h3><%= @doi.desc %></h3>
 
 <!-- this table use to be in app/views/urls/index.html.erb -->
-<table>
+<table border=1>
   <thead>
       <tr>
-        <th>Url</th>
+        <th>Time</th>
+        <th>Url</th>        
         <th colspan="3"></th>
     </tr>
   </thead>
 
-  <tbody>
-    <% @doi.urls.each do |url| %>
-        <% if !url.new_record? %>    
-            <tr>
-                <td><%= url.url %></td>
-                <td><%= link_to 'Edit', edit_url_path(url) %></td>
-                <td><%= link_to 'Destroy', url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-        <% end %>
-    <% end %>
-  </tbody>
+    <tbody>
+        <% @newest = @doi.urls.first %>
+        <% @doi.urls.each do |url| %>
+            <% if url.created_at.to_s > @newest.created_at.to_s %>
+                <% @newest = url %>
+            <% end %>
+        <% end %>       
+    <tr>
+        <td><%= @newest.created_at.to_s %></td>
+        <td><%= @newest.url %></td>
+        <td><%= link_to 'Edit', edit_url_path(@newest) %></td>
+        <td><%= link_to 'Destroy', @newest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+   </tbody>
 </table>
+<%= link_to 'Show URL history', history_path(@doi) %>
 <br>
 <h3>Create New URL</h3>
 <%= render 'urls/form' %>
 <br>
 <br>
-<%= link_to "Edit #{@doi.name}'s Profile", edit_doi_path(@doi) %> |
+<%= link_to "Edit #{@doi.name}'s Profile", edit_doi_path(@doi) %> 
 <%= link_to 'Show all Dois', dois_path %>

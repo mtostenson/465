@@ -8,8 +8,8 @@
 
 dois = Doi.create(
     [
-        { name: 'Google', desc: 'Google search engine' },
-        { name: 'RSI', desc: 'Roberts Space Industries' }
+        { name: 'Google', desc: 'Google search engine', doi_num: '33J2LK4' },
+        { name: 'Reddit', desc: 'Reddit website', doi_num: 'ASDFBZSCV' }
     ]
 )
 
@@ -17,6 +17,6 @@ urls = Url.create(
     [
         { url: 'www.google.com', doi_id: dois[0].id },
         { url: 'www.gooogle.com', doi_id: dois[0].id },
-        { url: 'www.robertsspaceindustries.com', doi_id: dois[1].id },
+        { url: 'www.reddit.com', doi_id: dois[1].id },
     ]
 )

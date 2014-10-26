@@ -4,14 +4,21 @@ class DoisController < ApplicationController
   # GET /dois
   def index
     @dois = Array.new
-    if params[:search_string] != nil
-        @search_query = params[:search_string]
+    if params[:search_string] != nil        
         Doi.all.each do |cur_doi|
             reg = Regexp.new params[:search_string]
             if cur_doi.name =~ reg
                 @dois.push cur_doi
             end
         end
+    elsif params[:search_doi] != nil
+        
+        Doi.all.each do |cur_doi|
+            if cur_doi.doi_num == params[:search_doi]
+                @dois.push cur_doi
+                break
+            end
+       end
     end
   end
 
@@ -29,11 +36,15 @@ class DoisController < ApplicationController
   # GET /dois/1/edit
   def edit
   end
+  
+  # GET/dois/1/history
+  def history
+  end
 
   # POST /dois
   def create
     @doi = Doi.new(doi_params)
-
+    @doi.doi_num = SecureRandom.hex(10)
     if @doi.save
       redirect_to @doi, notice: 'Doi was successfully created.'
     else

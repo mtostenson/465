@@ -3,6 +3,7 @@ class CreateDois < ActiveRecord::Migration
     create_table :dois do |t|
       t.string :name
       t.string :desc
+      t.string :doi_num
 
       t.timestamps
     end

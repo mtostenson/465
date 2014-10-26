@@ -3,9 +3,15 @@ class DoisController < ApplicationController
 
   # GET /dois
   def index
-    @search_query = params[:search_string]
-    if @search_query == 'test'
-        @dois = Doi.all
+    @dois = Array.new
+    if params[:search_string] != nil
+        @search_query = params[:search_string]
+        Doi.all.each do |cur_doi|
+            reg = Regexp.new params[:search_string]
+            if cur_doi.name =~ reg
+                @dois.push cur_doi
+            end
+        end
     end
   end
 

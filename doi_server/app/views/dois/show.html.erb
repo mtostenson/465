@@ -14,6 +14,7 @@
   </thead>
 
     <tbody>
+        <% $current_doi = @doi %>
         <% @newest = @doi.urls.first %>
         <% @doi.urls.each do |url| %>
             <% if url.created_at.to_s > @newest.created_at.to_s %>
@@ -28,7 +29,7 @@
     </tr>
    </tbody>
 </table>
-<%= link_to 'Show URL history', history_path(@doi) %>
+<%= link_to 'Show URL history', history_path %>
 <br>
 <h3>Create New URL</h3>
 <%= render 'urls/form' %>

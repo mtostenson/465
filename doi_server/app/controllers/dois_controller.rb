@@ -34,11 +34,11 @@ class DoisController < ApplicationController
   end
 
   # GET /dois/1/edit
-  def edit
+  def edit    
   end
   
   # GET/dois/1/history
-  def history
+  def history        
   end
 
   # POST /dois

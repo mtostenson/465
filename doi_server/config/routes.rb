@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     
     root 'dois#index'
     get 'search', to: 'dois#index'
+    get 'history', to: 'dois#history'
             
 end

@@ -1,0 +1,11 @@
+<h1><%= $current_doi.name %>'s URL History</h1>
+<table border=1>
+    <th>Timestamp</th>
+    <th>URL</th>
+    <% $current_doi.urls.each do |url| %>
+        <tr>
+            <td><%= url.created_at %></td>
+            <td><%= url.url %></td>
+        </tr>
+    <% end %>
+</table>

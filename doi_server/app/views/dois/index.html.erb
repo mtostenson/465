@@ -1,4 +1,4 @@
-<h1>Listing Doi'ss</h1>
+<h1>Listing Doi's</h1>
 
 <table>
   <thead>
@@ -14,9 +14,9 @@
       <tr>
         <td><%= doi.name %></td>
         <td><%= doi.desc %></td>        
-        <td><%= link_to 'Show', url %></td>
-        <td><%= link_to 'Edit', edit_url_path(url) %></td>
-        <td><%= link_to 'Destroy', url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', doi %></td>
+        <td><%= link_to 'Edit', edit_doi_path(doi) %></td>
+        <td><%= link_to 'Destroy', doi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,4 +25,3 @@
 <br>
 
 <%= link_to 'New Doi', new_doi_path %>
-<%= link_to "Back to #{@doi.name}'s page", doi_path(@doi) %>

@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @doi.name%>'s Urls </h1>
+<h2>DOI: <%= @doi.doi_num %> </h1>
 <h3><%= @doi.desc %></h3>
 
 <!-- this table use to be in app/views/urls/index.html.erb -->
@@ -8,7 +9,8 @@
   <thead>
       <tr>
         <th>Time</th>
-        <th>Url</th>        
+        <th>Url</th>
+        <th>DOI</th>        
         <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +19,7 @@
         <% $current_doi = @doi %>
         <% @newest = @doi.urls.first %>
         <% @doi.urls.each do |url| %>
-            <% if url.created_at.to_s > @newest.created_at.to_s %>
+            <% if url.created_at.to_s >= @newest.created_at.to_s %>
                 <% @newest = url %>
             <% end %>
         <% end %>       
@@ -36,4 +38,4 @@
 <br>
 <br>
 <%= link_to "Edit #{@doi.name}'s Profile", edit_doi_path(@doi) %> 
-<%= link_to 'Show all Dois', dois_path %>
+<%= link_to 'Return to Search', dois_path %>

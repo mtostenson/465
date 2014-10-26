@@ -10,7 +10,7 @@
     <%= submit_tag("Search DOI") %>
 <% end %>
 
-<% if @dois != nil%>
+<% if @dois.size > 0 %>
     <br>
     <table border=1>
       <thead>

@@ -25,6 +25,7 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
+    @tag.image_id = current_image.id
 
     respond_to do |format|
       if @tag.save

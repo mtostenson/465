@@ -10,6 +10,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
+    @tag = @image.tags.new  
   end
 
   # GET /images/new
@@ -39,6 +40,12 @@ class ImagesController < ApplicationController
       render :new
     end
   end
+
+    
+  @image.tags.each do |new_tag|
+    new_tag.user_id = current_user.id
+  end
+
 
   # PATCH/PUT /images/1
   # PATCH/PUT /images/1.json

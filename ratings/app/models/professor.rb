@@ -4,6 +4,6 @@ class Professor < ActiveRecord::Base
     
     def name
         first + ' ' + last
-    end
+    end    
 
 end

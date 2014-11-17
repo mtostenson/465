@@ -45,7 +45,7 @@ class TagsController < ApplicationController
     @tag = @image.tags.new(tag_params)
 
     if @tag.save
-      redirect_to image_tags_url(@image) , notice: 'Tag was successfully created.'
+      redirect_to image_path(@tag.image) , notice: 'Tag was successfully created.'
     else
       render :new
     end
@@ -56,7 +56,7 @@ class TagsController < ApplicationController
   # and cannot be changed by edit (note that image_id is not permitted in tag_params())
   def update
     if @tag.update(tag_params)
-      redirect_to image_tags_url(@tag.image), notice: 'Tag was successfully updated.'
+      redirect_to image_path(@tag.image), notice: 'Tag was successfully updated.'
     else
       render :edit
     end
@@ -65,7 +65,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1
   def destroy
     @tag.destroy
-    redirect_to image_tags_url(@tag.image) , notice: 'Tag was successfully destroyed.'
+    redirect_to image_path(@tag.image) , notice: 'Tag was successfully destroyed.'
   end
 
   private

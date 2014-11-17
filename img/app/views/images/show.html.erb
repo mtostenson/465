@@ -37,9 +37,10 @@
   </tbody>
 </table>
 
-<h3>Create new Tag</h3>
-<%= render 'tags/form' %>
-
+<% if current_user == @image.user %>
+  <%= render 'tags/form' %>
+<% end %>
+  
 <% if @image.priv %>
   <h3>Add users</h3>
   <%= render 'image_users/form' %>

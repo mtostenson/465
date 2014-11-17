@@ -13,6 +13,7 @@ class ImagesController < ApplicationController
   def show
     @tag = @image.tags.new
     @image_user = @image.image_users.new    
+    @eligible_users = @image.blocked_users
   end
   
   # GET /images/new

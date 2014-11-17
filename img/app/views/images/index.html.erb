@@ -1,6 +1,6 @@
 <center>
-<h1>Listing images</h1>
-<table>
+<h1>WOW Such Images</h1>
+<table border='1'>
   <thead>
     <tr>
       <th>Image</th>
@@ -10,15 +10,25 @@
     </tr>
   </thead>
 
+  <% if current_user == nil %>
+    <h2>You are not logged in</h2>
+  <% end %>
+  
+  
   <tbody>
     <% @images.each do |image| %>       
       <tr> 
         <td><%= link_to image_tag(root_url + "/images/" + image.filename, size: "50x50", alt: image.filename), image %></td>
-        <td><%= image.filename %></td>
-        <td><%= image.user.name %></td>      
+        <td><%= image.filename %>
+      <% if image.priv %>
+          <br><i>Private image</i></td>
+        <% end %></td>
+        <td><%= image.user.name %></td>
+        <td>
         <% if current_user == image.user %>
-            <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <%= link_to 'Delete', image, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
+        </td>
       </tr>     
     
     <% end %>

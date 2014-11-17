@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Filename:</strong>
-  <%= @image.filename %>
+
+<h1>  <%= @image.filename %></h1>
 </p>
 
 <p>
@@ -30,7 +30,7 @@
       <tr>
         <td><%= tag.tag %></td>
         <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
@@ -40,6 +40,9 @@
 <h3>Create new Tag</h3>
 <%= render 'tags/form' %>
 
+<% if @image.priv %>
+  <%= render 'image_users/form' %>
+<% end %>
 
 <%= link_to 'Edit', edit_image_path(@image) %>
 <%= link_to 'Back', images_path %>

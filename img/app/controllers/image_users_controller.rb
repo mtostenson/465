@@ -25,10 +25,15 @@ class ImageUsersController < ApplicationController
   # POST /image_users.json
   def create
     @image_user = ImageUser.new(image_user_params)
-
+    
+    @image = Image.find params[:image_id]
+    @user = User.find image_user_params[:user_id]    
+    
+    @image.image_users.put(@user)  
+      
     respond_to do |format|
       if @image_user.save
-        format.html { redirect_to @image_user, notice: 'Image user was successfully created.' }
+        format.html { redirect_to @image, notice: 'User was successfully added.' }
         format.json { render :show, status: :created, location: @image_user }
       else
         format.html { render :new }

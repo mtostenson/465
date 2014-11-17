@@ -3,11 +3,7 @@ class ImagesController < ApplicationController
 
   # GET /images
   def index
-    @images = Image.all
-    if current_user
-      @current_user_images = current_user.images
-      @my_private_images = current_user.image_users.map { |image_user| image_user.image } 
-    end
+      # NOTHING WORKS IN HERE WTF
   end
 
   # GET /images/1

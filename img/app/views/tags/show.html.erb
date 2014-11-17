@@ -7,8 +7,10 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @tag.image %>
+  <%= @tag.image.name %>
 </p>
 
+<%= render 'tag/form' %>
+  
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>

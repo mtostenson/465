@@ -8,7 +8,7 @@ class Image < ActiveRecord::Base
   accepts_nested_attributes_for :tags, reject_if: lambda { |attributes| attributes['tag'].blank? }
   
   def generate_filename
-    (0...8).map { (65 + rand(26)).chr }.join
+    self.filename = (0...8).map { (65 + rand(26)).chr }.join.to_s + '.jpg'    
   end
   
 end

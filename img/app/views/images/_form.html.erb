@@ -12,12 +12,8 @@
       <br>
     </div>    
     <br>
-  <% end %>    
-  <div class="field">
-   <br>
-    <%= f.label "Name of file" %><br>
-    <%= f.text_field :filename %>
-  </div>
+  <% end %>   
+
   <div class="field">
     <%= f.label "Private?" %>
     <%= f.check_box :priv %>
@@ -33,6 +29,20 @@
     <%= f.text_field :tag_id %>
   </div>
   -->
+  
+  <% if @image.tags.last.new_record? %>
+    <% f.fields_for :tags do |tags_form| %>
+        <h3>New Tag</h3>
+        <div style="margin-left:30px;">
+          <div class="field">
+            <%= tags_form.label :tag %><br>
+            <%= tags_form.text_field :tag %>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+  <br>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

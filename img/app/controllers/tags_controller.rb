@@ -1,65 +1,71 @@
+# This controller does not have a show function
+# since tags are shown by image, it does not make sense to
+# show a single tag
+
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag, only: [:edit, :update, :destroy]
 
-  # GET /tags
-  # GET /tags.json
+  # GET /images/:image_id/tags
   def index
-    @tags = Tag.all
+    # index is now all the tags for a single image (not all the tags)
+    # the URL will contain the id of the current image (:image_id)
+    # use the :image_id parameter to find all the tags
+    @image = Image.find params[:image_id]
+    # the has_many function called in app/models/image.rb created the 
+    # function "tags" which will return an array of all the tags 
+    # with the image foreign key matching @image
+    @tags = @image.tags
   end
 
-  # GET /tags/1
-  # GET /tags/1.json
-  def show
-  end
-
-  # GET /tags/new
+  # GET images/:image_id/tags/new
+  # Create a new tag in the context of a Image object
+  # that way the Tag's foreign key (image_id) will be
+  # initialized correctly.
   def new
-    @tag = Tag.new
+    @image = Image.find params[:image_id]
+    @tag = @image.tags.new
   end
+    # since our the tag new path contains the image's id
+    # we can use params[:image_id] to get that id
+
+    # This is similar to Tag.new, BUT it creates the new tag
+    # in the context of a Image object and sets the foreign key
 
   # GET /tags/1/edit
   def edit
+    # edit routes are not nested (we already know our image's foreign_key)
   end
 
-  # POST /tags
-  # POST /tags.json
+  # POST images:/:image_id/tags
+  # we need the image's key in the URL to make sure that someone 
+  # isn't trying to hack the id of the new tag's image
+  # rails ensures that the URL has not be tampered with
   def create
-    @tag = Tag.new(tag_params)
-    @tag.image_id = current_image.id
+    @image = Image.find params[:image_id]
+    @tag = @image.tags.new(tag_params)
 
-    respond_to do |format|
-      if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
-      else
-        format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
+    if @tag.save
+      redirect_to image_tags_url(@image) , notice: 'Tag was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /tags/1
-  # PATCH/PUT /tags/1.json
+  # updates don't have to be nested because the image foreign key is already set
+  # and cannot be changed by edit (note that image_id is not permitted in tag_params())
   def update
-    respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
+    if @tag.update(tag_params)
+      redirect_to image_tags_url(@tag.image), notice: 'Tag was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /tags/1
-  # DELETE /tags/1.json
   def destroy
     @tag.destroy
-    respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to image_tags_url(@tag.image) , notice: 'Tag was successfully destroyed.'
   end
 
   private
@@ -70,6 +76,6 @@ class TagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:tag, :image_id)
+      params.require(:tag).permit(:tag)
     end
 end

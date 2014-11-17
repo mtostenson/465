@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong>Priv:</strong>
+  <strong>Private?</strong>
   <%= @image.priv %>
 </p>
 
@@ -15,13 +15,29 @@
   <%= @image.user.name %>
 </p>
 
-<p>
-  <strong>Tag:</strong>
-  <%= @image.tag %>
-</p>
+<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename, size: "250x250" %>
 
-<%= image_tag root_url + "/images/" + @image.filename, alt: @image.filename %>
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>      
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @image.tags.each do |tag| %>
+      <% if !tag.new_record? %>
+      <tr>
+        <td><%= tag.tag %></td>
+        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 
+<h3>Create new Tag</h3>
 <%= render 'tags/form' %>
 
 

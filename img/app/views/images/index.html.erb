@@ -12,18 +12,16 @@
   </thead>
 
   <tbody>
-    <% @images.each do |image| %>
+    <% @current_user_images.each do |image| %>       
       <tr> 
         <td><%= image_tag root_url + "/images/" + image.filename, size: "50x50", alt: image.filename %></td>
         <td><%= image.filename %></td>
         <td><%= image.priv %></td>
-        <td><%= image.user.name %></td>
-        <%= if tag.user_id == current_user.id %>
-            <td><%= link_to 'Show', image %></td>
-            <td><%= link_to 'Edit', edit_image_path(image) %></td>
+        <td><%= image.user.name %></td>        
+            <td><%= link_to 'Show', image %></td>            
             <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>        
-      </tr>      
+      </tr>     
+    
     <% end %>
   </tbody>
 </table>

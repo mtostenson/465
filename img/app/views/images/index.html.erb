@@ -16,13 +16,15 @@
   
   
   <tbody>
-    <% @images.each do |image| %>       
+    <% @current_user_images.each do |image| %>       
       <tr> 
         <td><%= link_to image_tag(root_url + "/images/" + image.filename, size: "50x50", alt: image.filename), image %></td>
         <td><%= image.filename %>
-      <% if image.priv %>
+        
+        <% if image.priv %>
           <br><i>Private image</i></td>
         <% end %></td>
+        
         <td><%= image.user.name %></td>
         <td>
         <% if current_user == image.user %>

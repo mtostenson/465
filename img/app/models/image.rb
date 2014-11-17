@@ -12,7 +12,7 @@ class Image < ActiveRecord::Base
   end
 
   def blocked_users
-    (User.all - self.users).map { |user | [user.name + ' | ' + user.email, user_id] if user!= self.user}.compact
+    (User.all - self.users).map { |user| [user.name + ' | ' + user.email, user.id] if user!= self.user}.compact
   end
     
 end

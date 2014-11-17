@@ -24,12 +24,10 @@ class ImageUsersController < ApplicationController
   # POST /image_users
   # POST /image_users.json
   def create
+    
     @image_user = ImageUser.new(image_user_params)
     
-    @image = Image.find params[:image_id]
-    @user = User.find image_user_params[:user_id]    
-    
-    @image.image_users.put(@user)  
+    @image = Image.find params[:image_id]              
       
     respond_to do |format|
       if @image_user.save

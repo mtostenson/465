@@ -6,6 +6,7 @@ class ImagesController < ApplicationController
     @images = Image.all
     if current_user
       @current_user_images = current_user.images
+      @my_private_images = current_user.image_users.map { |image_user| image_user.image } 
     end
   end
 
@@ -31,8 +32,8 @@ class ImagesController < ApplicationController
    def create
      @image = Image.new(image_params)
      @image.generate_filename
-     @image.user = current_user
- 
+     @image.user = current_user     
+     
      @uploaded_io = params[:image][:uploaded_file]
  
      File.open(Rails.root.join('public', 'images', @image.filename), 'wb') do |file|

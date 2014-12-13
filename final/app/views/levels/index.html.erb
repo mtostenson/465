@@ -1,6 +1,8 @@
 <div class='container'>
 <h1><strong>keymasher!</strong></h1>
-   <%= link_to 'New Level', new_level_path %>
+   <b>
+    <%= link_to 'New Level', new_level_path %> | <%= link_to 'My Scores', scores_path %>
+   </b>
    <hr>
     <% @levels.each do |level| %>
       <div>

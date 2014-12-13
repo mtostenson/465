@@ -13,6 +13,7 @@ class LevelsController < ApplicationController
 
   def show
     @user = current_user
+    @scores = @level.scores
     @topscore = @level.scores.order("score DESC").first
     respond_with(@level)
   end

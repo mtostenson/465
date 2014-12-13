@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="user_nav">
+  <div id="user_nav" class='pull-right'>
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?
     <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
@@ -19,6 +19,6 @@
 </div>
   <%= yield %>
   <p class="text-center" ><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <p class="text-center"><%= alert %></p>
 </body>
 </html>

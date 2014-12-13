@@ -3,12 +3,11 @@
 <head>
   <title>Keymasher</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'thetheme.css' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <div id="user_nav">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?
@@ -19,5 +18,7 @@
     <% end %>
 </div>
   <%= yield %>
+  <p class="text-center" ><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 </body>
 </html>

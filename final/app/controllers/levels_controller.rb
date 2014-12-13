@@ -1,4 +1,7 @@
 class LevelsController < ApplicationController
+  
+  skip_before_filter  :verify_authenticity_token
+
   before_action :set_level, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
@@ -9,6 +12,8 @@ class LevelsController < ApplicationController
   end
 
   def show
+    @user = current_user
+    @topscore = @level.scores.order("score DESC").first
     respond_with(@level)
   end
 
@@ -17,6 +22,10 @@ class LevelsController < ApplicationController
     respond_with(@level)
   end
 
+  def over
+    Score.create(:score => params[:score], :user_id => params[:user_id], :level_id => params[:level_id])
+  end
+  
   def edit
   end
 
@@ -35,6 +44,11 @@ class LevelsController < ApplicationController
   def destroy
     @level.destroy
     respond_with(@level)
+  end
+  
+  def submit_score
+    @score = Score.new
+    @score.save
   end
 
   private

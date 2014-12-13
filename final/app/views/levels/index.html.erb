@@ -1,31 +1,19 @@
-<h1>Listing levels</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class='container'>
+<h1><strong>keymasher!</strong></h1>
+   <%= link_to 'New Level', new_level_path %>
+   <hr>
     <% @levels.each do |level| %>
-      <tr>
-        <td><%= level.title %></td>        
-        <td><%= level.user.email.split('@', 2).first %></td>
-        <td><%= link_to 'Play', level %></td>
-        
+      <div>
+        <p><strong><%= level.title %></strong> by <strong><%=level.user.email.split('@', 2).first %></strong>:</p>        
+        <p><i><%= level.content %></i></p>
+        <p><b><%= link_to 'Play', level %>     
         <% if(level.user == current_user) %>
-          <td><%= link_to 'Edit', edit_level_path(level) %></td>
-          <td><%= link_to 'Destroy', level, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= link_to 'Edit', edit_level_path(level) %>
+          <%= link_to 'Destroy', level, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
-          
-      </tr>
+        </b></p>
+      <hr>    
+      </div>
     <% end %>
   </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Level', new_level_path %>
+</div>

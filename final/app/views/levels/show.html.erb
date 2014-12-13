@@ -1,13 +1,20 @@
-<p id="notice"><%= notice %></p>
+
+<div class='container'>
+<h1>
+  <strong>
+  <%= @level.title %>
+  </strong>
+</h1>
 
 <p>
-  <strong>Title:</strong>
-  <%= @level.title %>
-</p>
+  <strong>TOP SCORE:</strong>
+  <% if @topscore != nil %>
+    <%= @topscore.score.to_s + ' wpm by ' + @topscore.user.email.split('@', 2).first %>  
+  <% end %>
 
 <div id='display'></div>
     <br>
-    <textarea style="resize:none" id ='input' rows='5' cols='50'></textarea>
+    <textarea style="resize:none" id ='input' rows='5' cols='50' bgcolor='#ffffff'></textarea>
     <br>
     <div id='clock'>0</div>
     <div id='console'></div>
@@ -16,34 +23,44 @@
     var running = false;
     var timer;
     var sec = 0;
+    var wpm = 0;
+    var finished = false;
     var caption = '<%= @level.content %>'
     var console = document.getElementById('console');
     var display = document.getElementById('display');
     var input = document.getElementById('input');
-    var clock = document.getElementById('clock');
+    var clock = document.getElementById('clock');    
     var bar = document.getElementById('bar');
     input.value='';
     input.onkeyup = function(e) {
-      if(running == false) {
+      
+      if(running == false) {        
         running = true;
         timer = setInterval(function(){
-          clock.innerHTML=(input.value.split(' ').length * (60/++sec)).toFixed(1) + ' wpm';
+          wpm = (input.value.split(' ').length * (60/++sec)).toFixed(1);
+          clock.innerHTML=(input.value.split(' ').length * (60/++sec)).toFixed(1);          
         }, 1000);
       }
       var tReg = new RegExp('^'+input.value+'+');
       if(tReg.test(caption)) {
-        input.style.color = 'green';    
+        input.style.color = 'green';            
         console.innerHTML = Math.round((input.value.length / caption.length)*100) + '% complete';
         bar.setAttribute("style","width:50px");
+        if(input.value.length == caption.length && finished == false) {          
+          clearInterval(timer);
+          xmlHttp = new XMLHttpRequest();
+          clock.innerHTML = wpm;
+          xmlHttp.open("POST", "http://54.183.146.89:3000/add_score/<%= @user.id %>/<%= @level.id%>/" + clock.innerHTML);          
+          xmlHttp.send(null);
+          finished = true;
+        }
       }
       else
-        input.style.color = 'red';
-      if (input.value == caption) {
-        window.clearInterval(timer);
-        clock.innerHTML = (caption.split(' ').length * (60/sec)).toFixed(1) + ' wpm';
-      }   
+        input.style.color = 'red';      
     }
     display.innerHTML='<b>'+caption;      
-    </script>
-  
+    </script>    
 <%= link_to 'Back', levels_path %>
+
+<p id="notice"><%= notice %></p>
+</div>

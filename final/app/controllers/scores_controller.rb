@@ -8,7 +8,7 @@ class ScoresController < ApplicationController
     respond_with(@scores)
   end
 
-  def show
+  def show    
     respond_with(@score)
   end
 
@@ -31,6 +31,10 @@ class ScoresController < ApplicationController
     respond_with(@score)
   end
 
+  def testing
+    Score.create(:score => 42)
+  end
+  
   def destroy
     @score.destroy
     respond_with(@score)

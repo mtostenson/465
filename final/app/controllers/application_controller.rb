@@ -5,4 +5,10 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   
   protect_from_forgery with: :exception
+  
+  helper_method :new_score
+  
+  def new_score(score, level, user)
+    Score.create(:score => score, :level_id => level, :user_id => user)
+  end
 end

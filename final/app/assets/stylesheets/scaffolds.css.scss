@@ -1,5 +1,5 @@
-body {
-  background-color: #fff;
+body {  
+  background-color: #FFFF00;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -30,7 +30,7 @@ a {
 }
 
 div {
-  &.field, &.actions {
+  &.field, &.actions {    
     margin-bottom: 10px;
   }
 }
